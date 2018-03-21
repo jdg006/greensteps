@@ -12,6 +12,21 @@ module Admins
       end
     end
 
+    def edit
+      @prize = Prize.find(params[:id])
+    end
+
+    def update
+      @prize = Prize.find(params[:id])
+      @prize.assign_attributes(prize_params)
+
+      if @prize.save
+        redirect_to admins_dashboard_path, notice: t('.success')
+      else
+        render :edit, alert: t('.alert')
+      end
+    end
+
     private
 
     def prize_params
