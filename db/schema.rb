@@ -120,15 +120,3 @@ ActiveRecord::Schema.define(version: 20180326132159) do
 
   add_foreign_key "deeds", "users"
 end
-© 2018 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Help
-Contact GitHub
-API
-Training
-Shop
-Blog
-About
