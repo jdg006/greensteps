@@ -1,3 +1,5 @@
+require Rails.root.join('lib', 'factory_helpers', 'add_points_to_user.rb')
+
 FactoryBot.define do
   sequence :email do |n|
     "user#{n}@example.com"
@@ -10,6 +12,21 @@ FactoryBot.define do
   factory :user do
     email { generate :email }
     password 'password'
+
+    transient do
+      total_points nil
+    end
+
+    after(:create) do |user, evaluator|
+      AddPointsToUser.new(user, evaluator.total_points)
+    end
+
+    trait :with_redeemed_gift_card do
+      after(:create) do |user|
+        AddPointsToUser.new(user, 5) if user.total_points < 5
+        create :redemption, user: user
+      end
+    end
 
     trait :with_deeds do
       after(:create) do |user|

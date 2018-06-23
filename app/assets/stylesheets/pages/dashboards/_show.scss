@@ -1,24 +1,79 @@
 .dashboards.show {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-around;
 
   > * {
+    @include elevation(2);
+
+    background-color: white;
+    border-radius: $base-border-radius;
     margin: $small-spacing;
+
+    header {
+      background-color: $primary-color;
+      border-top-left-radius: $base-border-radius;
+      border-top-right-radius: $base-border-radius;
+      color: $primary-text-light;
+      padding: $base-spacing * 2 / 3;
+
+      h2 {
+        margin: 0;
+        text-align: center;
+      }
+    }
+  }
+
+  .instructions {
+    max-width: 50em;
+
+    ol {
+      list-style: decimal;
+      padding-left: $base-spacing;
+
+      ol {
+        list-style: lower-alpha;
+      }
+    }
+
+    > ol {
+      margin: $base-spacing;
+    }
+  }
+
+  .new_redemption {
+    button {
+      display: block;
+      margin: $base-spacing auto;
+      padding: $base-spacing;
+    }
   }
 
   .station_map {
     position: relative;
     flex: 1 1 30em;
+    max-width: 45em;
   }
 
   .stats {
     flex-grow: 1;
-    max-width: 14em;
+    max-width: 20em;
 
     .add {
       @include button;
       @include compact-button;
+    }
+
+    .point_ledger {
+      justify-content: center;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      grid-gap: $tiny-spacing;
+      padding: $base-spacing;
+
+      .description {
+        justify-self: end;
+      }
     }
 
     header {
@@ -29,13 +84,19 @@
   }
 
   #map {
+    border: $tiny-spacing solid $primary-text-light;
+    border-bottom-left-radius: $base-border-radius;
+    border-bottom-right-radius: $base-border-radius;
     height: 20em;
     max-width: 45em;
     width: 100%;
   }
 
   #map_info {
-    background-color: rgba(#fff, 0.9);
+    background-color: rgba($primary-color, 0.85);
+    border-bottom-left-radius: $base-border-radius;
+    border-top-right-radius: $base-border-radius;
+    color: $primary-text-light;
     bottom: 0;
     display: none;
     left: 0;
@@ -46,6 +107,7 @@
       @include icon_only_button;
 
       border-radius: 0;
+      color: $primary-text-light;
       position: absolute;
       right: 0;
       top: 0;

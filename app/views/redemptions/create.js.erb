@@ -1,0 +1,5 @@
+newGiftCardButton = $("<%= j render 'dashboards/request_gift_card' %>")
+newStatsArticle = $("<%= j render 'dashboards/user_stats' %>")
+$('.new_redemption').replaceWith(newGiftCardButton)
+$('.stats').replaceWith(newStatsArticle)
+<%= render 'shared/update_flash' %>

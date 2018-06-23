@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_06_002622) do
+ActiveRecord::Schema.define(version: 2018_05_26_192823) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,12 +81,13 @@ ActiveRecord::Schema.define(version: 2018_05_06_002622) do
     t.index ["priority", "run_at"], name: "delayed_jobs_priority"
   end
 
-  create_table "prizes", id: :serial, force: :cascade do |t|
-    t.string "title"
-    t.integer "quantity"
-    t.integer "cost"
+  create_table "redemptions", force: :cascade do |t|
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "value"
+    t.string "confirmation_number"
+    t.index ["user_id"], name: "index_redemptions_on_user_id"
   end
 
   create_table "roles", id: :serial, force: :cascade do |t|
@@ -103,6 +104,13 @@ ActiveRecord::Schema.define(version: 2018_05_06_002622) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "strikes", force: :cascade do |t|
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_strikes_on_user_id"
   end
 
   create_table "task_records", id: false, force: :cascade do |t|
@@ -126,6 +134,7 @@ ActiveRecord::Schema.define(version: 2018_05_06_002622) do
     t.string "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
+    t.integer "strikes_count", default: 0
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["deleted_at"], name: "index_users_on_deleted_at"
     t.index ["email"], name: "index_users_on_email", unique: true
@@ -139,4 +148,6 @@ ActiveRecord::Schema.define(version: 2018_05_06_002622) do
   end
 
   add_foreign_key "deeds", "users"
+  add_foreign_key "redemptions", "users"
+  add_foreign_key "strikes", "users"
 end

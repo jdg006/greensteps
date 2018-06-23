@@ -12,14 +12,20 @@ Rails.application.routes.draw do
   root to: 'welcome#index'
   get 'welcome/index'
 
+  resources :redemptions, only: :create
+
   devise_for :users, controllers: { registrations: 'users/registrations' }
 
   resources :deeds, only: [:new, :create]
 
   namespace :admins do
     resource :dashboard, only: [:show]
+    resources :redemptions, only: [:index, :update]
     resources 'prizes', only: [:new, :create, :edit, :update]
     resources 'stations', only: [:new, :create]
+    resources 'users', only: [:index] do
+      resources :strikes, only: :create
+    end
     resources 'admins', only: [:index, :new, :create, :destroy]
   end
 

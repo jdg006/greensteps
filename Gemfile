@@ -23,6 +23,7 @@ gem 'geocoder'
 gem 'jbuilder', '~> 2.5'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
+gem 'kaminari'
 gem 'mail_interceptor'
 gem 'pg', '~> 0.18'
 gem 'pry'
@@ -58,11 +59,13 @@ end
 group :test do
   gem 'capybara-screenshot'
   gem 'database_cleaner'
+  gem 'db-query-matchers'
   gem 'launchy'
   gem 'poltergeist'
   gem 'rails-controller-testing'
   gem 'rspec-collection_matchers'
   gem 'shoulda-matchers'
   gem 'simplecov', require: false
+  gem 'timecop'
   gem 'webmock'
 end
