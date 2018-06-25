@@ -30,6 +30,9 @@
     <p>When in doubt, just use your best judgement!</p>
   </div>
   <%= f.number_field :trash_bags, min: 0, step: 1 %>
+  
+  <%= f.label :station %>
+  <%= f.collection_select :station_id, Station.all, :id, :name, {include_blank: 'Select a station'} %>
 
   <%= f.submit %>
 <% end %>

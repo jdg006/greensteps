@@ -5,6 +5,7 @@ class Deed < ApplicationRecord
 
   validates :trash_bags, numericality: { greater_than: 0 }, presence: true
   validate :photos_are_attached
+  validates :station_id, presence: true
 
   scope :total_trash_bags, -> { sum(:trash_bags) }
 
