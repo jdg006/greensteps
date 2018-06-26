@@ -1,5 +1,5 @@
 class AddStationIdToDeeds < ActiveRecord::Migration[5.2]
   def change
-    add_column :deeds, :station_id, :integer
+    add_reference :deeds, :station, index: true
   end
 end

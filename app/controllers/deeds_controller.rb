@@ -1,5 +1,6 @@
 class DeedsController < ApplicationController
   expose :deed, scope: -> { current_user.deeds }
+  expose :station, -> {deed.station}
 
   def new; end
 
@@ -15,6 +16,6 @@ class DeedsController < ApplicationController
   private
 
   def deed_params
-    params.require(:deed).permit(:trash_bags, :before_photo, :after_photo, :station_id)
+    params.require(:deed).permit(:trash_bags, :before_photo, :after_photo, :station)
   end
 end

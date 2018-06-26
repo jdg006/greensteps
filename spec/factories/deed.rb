@@ -3,6 +3,7 @@ FactoryBot.define do
   factory :deed do
     user
     trash_bags 1
+    station 'test station name'
 
     transient do
       with_before_photo { true }

@@ -2,6 +2,7 @@ class Deed < ApplicationRecord
   belongs_to :user
   has_one_attached :before_photo
   has_one_attached :after_photo
+  has_one :station
 
   validates :trash_bags, numericality: { greater_than: 0 }, presence: true
   validate :photos_are_attached
